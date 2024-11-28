@@ -4,7 +4,8 @@
   "main": "Developement_LocalEventsHub.js",
   "scripts": {
     "test": "jest", 
-    "start": "node Developement_LocalEventsHub.js" 
+    "start": "node Developement_LocalEventsHub.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,7 +21,7 @@
     "chai": "^5.1.2",
     "mocha": "^10.8.2",
     "supertest": "^7.0.0",
-    "jest": "^29.0.0" 
+    "jest": "^29.0.0"
   },
   "jest": { 
     "testEnvironment": "node", 
@@ -33,3 +34,4 @@
     ]
   }
 }
+
