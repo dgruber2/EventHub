@@ -6,8 +6,14 @@ const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-
 const app = express();
+
+// Define the rate limiter for login attempts
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 login requests per `window` (15 minutes)
+    message: 'Too many login attempts from this IP, please try again after 15 minutes.'
+});
 
 // Application configuration
 const config = {
@@ -91,6 +97,35 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    }
+});
+
+// Custom validation middleware to enforce unique fields
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('email') && !this.isModified('username')) {
+        return next();
+    }
+
+    try {
+        // Check if email already exists
+        const emailExists = await mongoose.models.User.findOne({ email: this.email });
+        if (emailExists && emailExists._id.toString() !== this._id.toString()) {
+            const err = new Error('Email already exists');
+            err.statusCode = 400;
+            return next(err);
+        }
+
+        // Check if username already exists
+        const usernameExists = await mongoose.models.User.findOne({ username: this.username });
+        if (usernameExists && usernameExists._id.toString() !== this._id.toString()) {
+            const err = new Error('Username already exists');
+            err.statusCode = 400;
+            return next(err);
+        }
+
+        next();
+    } catch (error) {
+        return next(error);
     }
 });
 
