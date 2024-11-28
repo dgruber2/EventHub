@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "Developement_LocalEventsHub.js",
   "scripts": {
-    "test": "jest", < Update the test script to use Jest >
-    "start": "node Developement_LocalEventsHub.js" < Optional: Add a start script if not already present>
-  },
+    "test": "jest", 
+    "start": "node Developement_LocalEventsHub.js" 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,14 +20,14 @@
     "chai": "^5.1.2",
     "mocha": "^10.8.2",
     "supertest": "^7.0.0",
-    "jest": "^29.0.0" < Add Jest as a dev dependency >
+    "jest": "^29.0.0" 
   },
-  "jest": { < Jest configuration
-    "testEnvironment": "node", < Set the test environment to Node.js >
-    "verbose": true, < Optional: Enable verbose test output >
-    "collectCoverage": true, < Optional: Enable code coverage collection >
-    "coverageDirectory": "./coverage", < Optional: Specify the coverage report directory >
-    "testMatch": [ < Optional: Define patterns for test file matching >
+  "jest": { 
+    "testEnvironment": "node", 
+    "verbose": true, 
+    "collectCoverage": true, 
+    "coverageDirectory": "./coverage", 
+    "testMatch": [ 
       "**/__tests__/**/*.js",
       "**/?(*.)+(spec|test).js"
     ]
